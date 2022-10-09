@@ -6,7 +6,7 @@ import { SendMailDto } from './dto/send-mail.dto';
 export class MailsService {
   constructor(private mailerService: MailerService) {}
 
-  async send(dto: SendMailDto) {
+  async sendNotification(dto: SendMailDto) {
     await this.mailerService.sendMail({
       to: dto.receipient,
       subject: dto.subject,
