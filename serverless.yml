@@ -1,0 +1,26 @@
+service: kiedy-kolos-mailer
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-central-1
+  stage: prod
+
+functions:
+  main:
+    name: kiedy-kolos-mailer
+    handler: dist/serverless.handler
+    timeout: 60
+    environment:
+      EMAIL_HOST: ${env:EMAIL_HOST}
+      EMAIL_USER: ${env:EMAIL_USER}
+      EMAIL_PASSWORD: ${env:EMAIL_PASSWORD}
+      CLIENT_SECRET: ${env:CLIENT_SECRET}
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
